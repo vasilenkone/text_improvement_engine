@@ -23,7 +23,7 @@ class ImprovementSuggestor():
     def __init__(self) -> None:
         """Initialize self. See help(type(self)) for accurate signature."""
         self.model = SentenceTransformer(
-            'sentence-transformers/all-MiniLM-L6-v2')
+            'sentence-transformers/all-MiniLM-L12-v2')
 
     def preprocess_sentences(self, sentences) -> list:
         '''Return preprocessed list of words (tokens)'''
@@ -40,7 +40,7 @@ class ImprovementSuggestor():
                 word_groups.append(sentence[i] + ' ' + sentence[i+1])
         return word_groups
 
-    def get_similar_words(self, tokenized_text, tokenized_terms, threshold=0.35) -> list:
+    def get_similar_words(self, tokenized_text, tokenized_terms, threshold=0.4) -> list:
         '''Return list of similar words or sentences (up to 10)'''
         embeddings = self.model.encode(tokenized_text, convert_to_tensor=True)
         embeddings_terms = self.model.encode(
